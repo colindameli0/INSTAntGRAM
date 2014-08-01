@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>INSTAntGRAM</title>
+  <link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="fancybox/jquery.fancybox.css">
+
+
+</head>
+<body>
+  <div class="container clearfix">
+    <div class="gallery">
+      <h1 class="header">INSTAntGRAM</h1>
+
+      <div class="filters-row">
+      	<div class="box1"><a class="filter1" href="#"> Morning Mist</a></div>
+      	<div class="box1"><a class="filter2" href="#"> Hi-Fi(ve) Acid</a></div>
+      	<div class="box1"><a class="filter3" href="#"> Lo-Fi Acid</a></div>
+      	<div class="box1"><a class="filter4" href="#"> Dance Dance Revolution</a></div>
+      	<div class="box1"><a class="filter5" href="#"> Wes Bosify</a></div>
+
+      </div> <!-- /.filters-row -->
+
+      <div class="previews">
+          <a href="#" data-full="images/dogs/dog2large.jpg"> <img class="selected off"  src="images/dogs/dog2small.jpg" height="75" widht="100"></a>
+          <a href="#" data-full="images/dogs/dog3large.jpg"> <img class="selected off"  src="images/dogs/dog3small.jpg" /></a>
+          <a href="#" data-full="images/new/Wins2.jpg"> <img class="selected off"  src="images/new/Wins2small.jpg" height="75" width="100" /></a>
+          <a href="#" data-full="images/new/Simon.jpg"> <img class="selected off"  src="images/new/Simonsmall.jpg" height="75" width="100" /></a>
+          <a href="#" data-full="images/new/Wes.jpg"> <img class="selected off"  src="images/new/wessmall.jpg" height="75" width="100" /></a>
+          <a href="#" data-full="images/new/Drew2.jpg"> <img class="selected off"  src="images/new/Drew2small.jpg" height="75" width="100" /></a>
+
+      </div> <!-- /.previews -->
+
+      <div class="full">
+          <!-- first image is viewable to start -->    
+         <a class="single-image" href="images/dogs/dog1large.jpg"> <img src="images/dogs/dog1large.jpg" height="550" width="724" class="main"/></a>
+      </div>
+
+      <div class="capWrap">
+      	<span class="caption"></span>
+      	<span class=" caption2"></span>
+       </div> <!-- /.capWrap -->
+      
+    </div> <!-- /.gallery -->
+  </div> <!-- /.container -->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="fancybox/jquery.fancybox.js?v=2.1.4"></script>
+
+<script>
+
+//VARIABLES STORED TO ALLOW CLEARING OF FILTERS UPON NEW CLICKS
+
+
+
+$(function() {
+  var chosen = "none";
+  var clear = function(){
+    $('.full').removeClass('filter');
+    $('.full').removeClass('high');
+    $('.full').removeClass('low');
+    $('.full').removeClass('dance');
+    $('.full').removeClass('wes');
+  }
+  $('.previews a').on('click',function(e){ 
+  	e.preventDefault();
+  	clear();
+    chosen = "none";
+
+    var fullImage = $(this).data('full'); 
+    var info = $(this).data('info');
+    var info1 = $(this).data('info1')
+    $('img.main').attr('src',fullImage);
+    $('.single-image').attr('href',fullImage);
+      // $('.caption').html('<p>' + info + '</p>');
+      // $('.caption2').html('<p>' + info1 + '</p>')
+  });
+
+  //HOVER STATE CHANGE BASED HERE
+
+  $('.selected').hover(function(e){
+  	e.preventDefault();
+  	$(this).toggleClass('off');
+  });
+
+
+  //ON AND OFF FILTERS WORK FROM HERE
+
+  $('.filter1').on('click', function(e){
+  	e.preventDefault();
+  	clear();
+  	$('.full').addClass('filter');
+    chosen = "filter";
+  });
+      
+
+  $('.filter2').on('click', function(e){
+  	e.preventDefault();
+  	clear();
+  	$('.full').addClass('low');
+    chosen = "low";
+  });
+
+
+  $('.filter3').on('click', function(e){
+  	e.preventDefault();
+  	clear();
+  	$('.full').addClass('dance');
+    chosen = "dance";
+  });
+
+
+  $('.filter4').on('click', function(e){
+  	e.preventDefault();
+  	clear();
+  	$('.full').addClass('high');
+    chosen = "high";
+  });
+
+  $('.filter5').on('click', function(e){
+  	e.preventDefault();
+  	clear();
+  	$('.full').addClass('wes');
+    chosen="wes";
+  });
+
+      //FANCY BOX 
+
+	$("a.single-image").fancybox({
+
+      beforeShow: function(){
+        $('.full').classList;
+        if(chosen !== "none")
+          $('.fancybox-image').addClass(chosen);
+      }
+  });	
+  
+});
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
