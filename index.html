@@ -22,16 +22,16 @@
       </div> <!-- /.filters-row -->
 
       <div class="previews">
-          <a href="#" data-full="images/dogs/dog2large.jpg"> <img class="selected off"  src="images/dogs/dog2small.jpg" height="75" widht="100"></a>
           <a href="#" data-full="images/dogs/dog3large.jpg"> <img class="selected off"  src="images/dogs/dog3small.jpg" /></a>
-          <a href="#" data-full="images/new/Wins2.jpg"> <img class="selected off"  src="images/new/Wins2small.jpg" height="75" width="100" /></a>
+          <a href="#" data-full="images/new/Brenna.jpg"> <img class="selected off"  src="images/new/brennasmall.jpg" width="100" height="75"></a>
+          <a href="#" data-full="images/new/sacha.jpg"> <img class="selected off"  src="images/new/smallsacha.jpg" height="75" width="100" /></a>
           <a href="#" data-full="images/new/Simon.jpg"> <img class="selected off"  src="images/new/Simonsmall.jpg" height="75" width="100" /></a>
           <a href="#" data-full="images/new/Wes.jpg"> <img class="selected off"  src="images/new/wessmall.jpg" height="75" width="100" /></a>
           <a href="#" data-full="images/new/Drew2.jpg"> <img class="selected off"  src="images/new/Drew2small.jpg" height="75" width="100" /></a>
 
       </div> <!-- /.previews -->
 
-      <div class="full">
+      <div id="full" class="full">
           <!-- first image is viewable to start -->    
          <a class="single-image" href="images/dogs/dog1large.jpg"> <img src="images/dogs/dog1large.jpg" height="550" width="724" class="main"/></a>
       </div>
@@ -56,17 +56,17 @@
 $(function() {
   var chosen = "none";
   var clear = function(){
-    $('.full').removeClass('filter');
-    $('.full').removeClass('high');
-    $('.full').removeClass('low');
-    $('.full').removeClass('dance');
-    $('.full').removeClass('wes');
+    $('#full').removeClass('filter');
+    $('#full').removeClass('high');
+    $('#full').removeClass('low');
+    $('#full').removeClass('dance');
+    $('#full').removeClass('wes');
   }
+
   $('.previews a').on('click',function(e){ 
   	e.preventDefault();
   	clear();
     chosen = "none";
-
     var fullImage = $(this).data('full'); 
     var info = $(this).data('info');
     var info1 = $(this).data('info1')
@@ -74,6 +74,12 @@ $(function() {
     $('.single-image').attr('href',fullImage);
       // $('.caption').html('<p>' + info + '</p>');
       // $('.caption2').html('<p>' + info1 + '</p>')
+  });
+
+  $('.previews a img').on('click', function() {
+    $('.previews a img').removeClass("on");
+    $(this).removeClass('off');
+    $(this).addClass('on');
   });
 
   //HOVER STATE CHANGE BASED HERE
@@ -89,7 +95,7 @@ $(function() {
   $('.filter1').on('click', function(e){
   	e.preventDefault();
   	clear();
-  	$('.full').addClass('filter');
+  	$('#full').addClass('filter');
     chosen = "filter";
   });
       
@@ -97,7 +103,7 @@ $(function() {
   $('.filter2').on('click', function(e){
   	e.preventDefault();
   	clear();
-  	$('.full').addClass('low');
+  	$('#full').addClass('low');
     chosen = "low";
   });
 
@@ -105,7 +111,7 @@ $(function() {
   $('.filter3').on('click', function(e){
   	e.preventDefault();
   	clear();
-  	$('.full').addClass('dance');
+  	$('#full').addClass('dance');
     chosen = "dance";
   });
 
@@ -113,14 +119,14 @@ $(function() {
   $('.filter4').on('click', function(e){
   	e.preventDefault();
   	clear();
-  	$('.full').addClass('high');
+  	$('#full').addClass('high');
     chosen = "high";
   });
 
   $('.filter5').on('click', function(e){
   	e.preventDefault();
   	clear();
-  	$('.full').addClass('wes');
+  	$('#full').addClass('wes');
     chosen="wes";
   });
 
@@ -129,7 +135,7 @@ $(function() {
 	$("a.single-image").fancybox({
 
       beforeShow: function(){
-        $('.full').classList;
+        $('#full').classList;
         if(chosen !== "none")
           $('.fancybox-image').addClass(chosen);
       }
